@@ -1,0 +1,10 @@
+#!/bin/bash
+# This script will be used to run unit tests.
+
+BASEDIR=$(dirname $(dirname "$0"))
+
+py.test "$BASEDIR"/corecat/test \
+    --pep8 "$BASEDIR"/corecat \
+    --cov "$BASEDIR"/corecat \
+    --cov-report term-missing \
+    --cov-config "$BASEDIR"/.coveragerc

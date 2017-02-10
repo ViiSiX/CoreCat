@@ -1,0 +1,5 @@
+.coverage
+.cache
+.unittest
+__pycache__
+*.pyc

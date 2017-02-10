@@ -1,0 +1,18 @@
+language: python
+python:
+  - 2.7
+  - 3.6
+install:
+  - pip install --upgrade setuptools
+  - pip install --upgrade pip
+  - pip install --upgrade wheel
+  - pip install codecov
+  - pip install -r requirements.txt
+script:
+  - bin/test
+branches:
+  only:
+    - master
+    - dev
+after_success:
+  - codecov
