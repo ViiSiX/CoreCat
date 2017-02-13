@@ -1,10 +1,9 @@
 import pytest
-import os
 from corecat.config import Config
 
 
 class TestCoreConfig(object):
-    """Unit test for corecat.config.Config class."""
+    """Unit tests for corecat.config.Config class."""
 
     def test_should_be_singleton(self):
         c0 = Config()
@@ -30,10 +29,8 @@ class TestCoreConfig(object):
 
     def test_config_would_be_loaded_from_env_var(self,
                                                  monkeypatch,
+                                                 fix_test_conf_reset,
                                                  fix_test_conf_setup_yaml):
-        # Reset the Config class.
-        Config.instance = None
-
         monkeypatch.setenv(Config.DANCECAT_CONFIGFILE_VAR_NAME,
                            fix_test_conf_setup_yaml)
         c0 = Config()

@@ -15,3 +15,9 @@ Developed Environment
 ---------------------
 
 * Python 3.6.0
+
+Tested Environment
+------------------
+
+* Python 3.6
+* Python 2.7

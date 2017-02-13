@@ -81,4 +81,12 @@ class Config(object):
         return Config.instance
 
 
-# TODO: Create own config error class.
+class ConfigNotLoadedException(Exception):
+    """When configs not loaded yet, raise this exception."""
+
+    def __init__(self):
+
+        # Calling the base lass constructor.
+        super(ConfigNotLoadedException, self).__init__(
+            'Configs must be loaded before using.'
+        )

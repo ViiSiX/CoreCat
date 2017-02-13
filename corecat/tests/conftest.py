@@ -3,7 +3,6 @@
 import os
 import pytest
 import yaml
-from corecat.config import Config
 
 
 test_dir = os.path.dirname(os.path.realpath(__file__)) + '/.unittest'
@@ -31,3 +30,11 @@ def fix_test_conf_setup_yaml():
     sample_yaml_file.close()
 
     return sample_yaml_path
+
+
+@pytest.fixture
+def fix_test_conf_reset():
+    """Reset the Config instance to None for testing."""
+    from corecat.config import Config
+
+    Config.instance = None
