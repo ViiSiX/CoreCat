@@ -201,12 +201,12 @@ def aes_decrypt(b64_string, key):
             cipher.decrypt(encrypted_string[AES.block_size:]).decode()
         )
     else:
-        return u'%s' % aes_raw_unpad(
+        return u'{0}'.format(aes_raw_unpad(
             cipher.decrypt(encrypted_string[AES.block_size:])
-        ).decode('utf-8')
+        ).decode('utf-8'))
 
 
-def is_valid_format_email(email):
+def validate_format_email(email):
     """Return if a given string is email or not."""
 
     try:
@@ -214,4 +214,4 @@ def is_valid_format_email(email):
             re.search(r'^.*?@([\w\-]+\.)+[\w\-]+$', email, flags=re.IGNORECASE)
         )
     except TypeError:
-        raise TypeError('Email should be string, not %s' % type(email))
+        raise TypeError('Email should be string, not {0}'.format(type(email)))

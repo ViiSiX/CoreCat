@@ -108,8 +108,8 @@ def test_aes_password_encrypt_decrypt():
         in str(except_info.value)
 
 
-def test_is_valid_format_email():
-    """Test is_valid_format_email function."""
+def test_validate_email_format():
+    """Test validate_email_format function."""
 
     valid_emails = [
         'test@test.test',
@@ -128,8 +128,8 @@ def test_is_valid_format_email():
         '.user@mail'
     ]
     for email in valid_emails:
-        assert utils.is_valid_format_email(email)
+        assert utils.validate_format_email(email)
     for email in invalid_emails:
-        assert not utils.is_valid_format_email(email)
+        assert not utils.validate_format_email(email)
     with pytest.raises(TypeError):
-        utils.is_valid_format_email(list)
+        utils.validate_format_email(list)

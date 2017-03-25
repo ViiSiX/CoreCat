@@ -3,7 +3,7 @@ In this module, defined the DanceCat config class
 which will be used to read configurations from YAML
 file. In that file we have:
 
-- Modules' definitions.
+- Modules' configurations.
 - DanceCat's configuration parameters.
 """
 
