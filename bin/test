@@ -3,7 +3,7 @@
 
 BASEDIR=$(dirname $(dirname "$0"))
 
-py.test "$BASEDIR"/corecat/test \
+py.test "$BASEDIR"/corecat/tests \
     --pep8 "$BASEDIR"/corecat \
     --cov "$BASEDIR"/corecat \
     --cov-report term-missing \

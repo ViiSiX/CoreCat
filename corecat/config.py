@@ -3,7 +3,7 @@ In this module, defined the DanceCat config class
 which will be used to read configurations from YAML
 file. In that file we have:
 
-- Modules' definitions.
+- Modules' configurations.
 - DanceCat's configuration parameters.
 """
 
@@ -81,4 +81,12 @@ class Config(object):
         return Config.instance
 
 
-# TODO: Create own config error class.
+class ConfigNotLoadedException(Exception):
+    """When configs not loaded yet, raise this exception."""
+
+    def __init__(self):
+
+        # Calling the base lass constructor.
+        super(ConfigNotLoadedException, self).__init__(
+            'Configs must be loaded before using.'
+        )
