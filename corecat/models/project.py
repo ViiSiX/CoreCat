@@ -44,4 +44,4 @@ class Project(CoreCatBaseMixin, Base):
             created_by_user_id
         )
         self.project_name = project_name
-        self.project_description = kwargs.get('project_description', None)
+        self.project_description = kwargs.get('project_description')

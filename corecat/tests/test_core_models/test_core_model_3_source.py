@@ -25,8 +25,8 @@ class TestSourceModel(object):
         source = SourceBase(**self.source_1)
 
         assert source.source_name
-        assert source.source_type is not None and \
-            isinstance(source.source_type, int)
+        assert source.source_type is not None
+        assert isinstance(source.source_type, int)
         assert source._version == MODEL_VERSION[OBJECT_CODES['Source']]
 
     def test_would_default_value_worked(self,
@@ -78,4 +78,6 @@ class TestSourceModel(object):
         assert source_get['base_uri'] == base_uri
 
         attribute_get = session.query(SourceAttribute).first()
-        assert attribute_get is not None
+        assert attribute_get.source_id == source_get.source_id
+        assert attribute_get.attribute_name == 'base_uri'
+        assert attribute_get.attribute_value == base_uri
