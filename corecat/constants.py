@@ -5,16 +5,18 @@
 # through through the system.
 OBJECT_CODES = {
     'User': 0,
-    'Project': 1,
-    'Role': 2,
-    'Source': 3
+    'Group': 1,
+    'Directory': 2,
+    'Project': 3,
+    'Source': 4
 }
 
 # Models' Version
 MODEL_VERSION = {
     OBJECT_CODES['User']: 1,
+    OBJECT_CODES['Group']: 1,
+    OBJECT_CODES['Directory']: 1,
     OBJECT_CODES['Project']: 1,
-    OBJECT_CODES['Role']: 1,
     OBJECT_CODES['Source']: 1,
 }
 

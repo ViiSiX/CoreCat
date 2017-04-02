@@ -4,6 +4,7 @@ import pytest
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from corecat.models.user import User
+from corecat.models.directory import Directory
 from corecat.models.project import Project
 from corecat.models.source import SourceBase, SourceAttribute
 from corecat.tests._utils import freeze_datetime
@@ -19,6 +20,7 @@ def fix_create_all_tables():
     # TODO: Auto create all
     User.__table__.create(engine, checkfirst=True)
     Project.__table__.create(engine, checkfirst=True)
+    Directory.__table__.create(engine, checkfirst=True)
     SourceBase.__table__.create(engine, checkfirst=True)
     SourceAttribute.__table__.create(engine, checkfirst=True)
 

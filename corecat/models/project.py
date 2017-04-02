@@ -6,7 +6,7 @@ from ._sqlalchemy import Column, \
 
 
 class Project(CoreCatBaseMixin, Base):
-    """Project Model class represent for the 'projects' table
+    """Project Model class represent for the 'project' table
     which is used to store project's basic information."""
 
     # Add the real table name here.

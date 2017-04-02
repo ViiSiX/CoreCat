@@ -20,14 +20,14 @@ class TestCoreConfig(object):
         with pytest.raises(TypeError):
             c0['config_key']
 
-    def test_config_would_be_loaded(self, fix_test_conf_setup_yaml):
+    def test_config_would_be_loaded(self, fix_test_conf_setup_yml):
         """Config should consist in every initiated class. It's also able to
         load values after initiation."""
 
         c0 = Config()
         assert not c0.is_loaded
 
-        c0.load(fix_test_conf_setup_yaml)
+        c0.load(fix_test_conf_setup_yml)
         assert c0.is_loaded
         assert c0['key1'] == 'value1'
 
@@ -37,11 +37,11 @@ class TestCoreConfig(object):
     def test_config_would_be_loaded_from_env_var(self,
                                                  monkeypatch,
                                                  fix_test_conf_reset,
-                                                 fix_test_conf_setup_yaml):
+                                                 fix_test_conf_setup_yml):
         """Config can also auto-load from environment variables."""
 
         monkeypatch.setenv(Config.DANCECAT_CONFIGFILE_VAR_NAME,
-                           fix_test_conf_setup_yaml)
+                           fix_test_conf_setup_yml)
         c0 = Config()
         assert c0.is_loaded
         assert c0['key1'] == 'value1'

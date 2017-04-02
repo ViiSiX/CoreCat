@@ -9,7 +9,7 @@ from ._sqlalchemy import Column, \
 
 
 class User(CoreCatBaseMixin, Base):
-    """The User class represent for the User table
+    """The User class represent for the 'user' table
     containing a user's information."""
 
     # Add the real table name here.

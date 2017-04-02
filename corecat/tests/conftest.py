@@ -38,7 +38,7 @@ def fix_test_conf_setup_yml():
 @pytest.fixture
 def fix_test_conf_reset():
     """Reset the Config instance to None for testing."""
-    
+
     from corecat.config import Config
 
     Config.instance = None
