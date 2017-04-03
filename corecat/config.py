@@ -1,13 +1,13 @@
 """
 In this module, defined the DanceCat config class
-which will be used to read configurations from YAML
+which will be used to read configurations from YML
 file. In that file we have:
 
 - Modules' configurations.
 - DanceCat's configuration parameters.
 """
 
-import yaml
+import yaml as yml
 from os import path, environ
 
 
@@ -40,15 +40,15 @@ class Config(object):
             return self.params[item]
 
         def load(self, file_path):
-            """Reading values from YAML file and storing the values.
+            """Reading values from YML file and storing the values.
             Configuration file should be encoded in utf-8.
 
-            :param file_path: Path to configuration file in YAML format.
+            :param file_path: Path to configuration file in YML format.
             :type file_path: str
             """
 
-            if not file_path.endswith('.yaml'):
-                raise ValueError('The file {0} is not YAML file!'.format(
+            if not file_path.endswith('.yml'):
+                raise ValueError('The file {0} is not YML file!'.format(
                     file_path
                 ))
 
@@ -58,9 +58,9 @@ class Config(object):
                 ))
 
             try:
-                self.params = yaml.load(open(file_path, 'r', encoding="utf-8"))
+                self.params = yml.load(open(file_path, 'r', encoding="utf-8"))
             except TypeError:
-                self.params = yaml.load(open(file_path, 'r'))
+                self.params = yml.load(open(file_path, 'r'))
             self.is_loaded = True
 
         def load_from_env_var(self):

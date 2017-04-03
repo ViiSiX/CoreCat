@@ -9,13 +9,13 @@ class TestProjectModel(object):
     project_1 = {
         'project_name': 'Project #1',
         'project_description': 'Description for Project #1',
-        'created_by_user_id': 1,
+        'created_by_user_id': 0,
     }
 
     project_2 = {
         'project_name': 'Project #2',
         'project_description': 'Description for Project #2',
-        'created_by_user_id': 1,
+        'created_by_user_id': 0,
     }
 
     def test_would_init_work(self, fix_add_user):
@@ -38,10 +38,11 @@ class TestProjectModel(object):
         session.add(project_1)
         session.commit()
 
+        assert project_1.project_id == 1
         assert project_1.is_active
         assert not project_1.is_deleted
-        assert project_1.created_by == 1
-        assert project_1.last_updated_by == 1
+        assert project_1.created_by == 0
+        assert project_1.last_updated_by == 0
         datetime_now = datetime.datetime.now()
         assert round(
             (datetime_now - project_1.created_on).total_seconds()
@@ -54,5 +55,6 @@ class TestProjectModel(object):
         session.add(project_2)
         session.commit()
 
-        assert project_2.created_by == 1
-        assert project_2.last_updated_by == 1
+        assert project_2.project_id == 2
+        assert project_2.created_by == 0
+        assert project_2.last_updated_by == 0

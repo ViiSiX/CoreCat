@@ -10,7 +10,7 @@ from ._sqlalchemy import Column, ForeignKey, \
 
 
 class SourceBase(CoreCatBaseMixin, ProxyDictMixin, Base):
-    """Source Model Base class represent for the source_base table
+    """Source Model Base class represent for the 'source_base' table
     which is used to store data sources."""
 
     # Add the real table name here.
@@ -55,7 +55,7 @@ class SourceBase(CoreCatBaseMixin, ProxyDictMixin, Base):
         :type source_name: str
         :param source_type: Type of the data source.
         :type source_type: int
-        :param created_by_user_id:
+        :param created_by_user_id: created under this user Id.
         :type created_by_user_id: int
         """
 
@@ -68,8 +68,8 @@ class SourceBase(CoreCatBaseMixin, ProxyDictMixin, Base):
 
 
 class SourceAttribute(Base):
-    """Order attributes for Source Model which is not
-    stored on 'sources' table."""
+    """Other attributes for Source Model which is not
+    stored on 'source_base' table."""
 
     __tablename__ = 'source_attribute'
 

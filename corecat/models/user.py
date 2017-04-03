@@ -9,7 +9,7 @@ from ._sqlalchemy import Column, \
 
 
 class User(CoreCatBaseMixin, Base):
-    """The User class represent for the User table
+    """The User class represent for the 'user' table
     containing a user's information."""
 
     # Add the real table name here.
@@ -21,10 +21,15 @@ class User(CoreCatBaseMixin, Base):
                      primary_key=True,
                      autoincrement=True
                      )
+    user_name = Column('userName', String(100),
+                       index=True,
+                       unique=True,
+                       nullable=False
+                       )
     user_email = Column('emailAddress', String(255),
                         index=True,
                         unique=True,
-                        nullable=False
+                        nullable=True
                         )
     password = Column('password', String(255),
                       nullable=False
@@ -35,14 +40,18 @@ class User(CoreCatBaseMixin, Base):
     # Relationship
     # TODO: Building relationship
 
-    def __init__(self, user_email, user_password,
-                 created_by_user_id=0):
+    def __init__(self, user_name, user_password,
+                 user_email=None,
+                 created_by_user_id=0,
+                 **kwargs):
         """
         Constructor for User Model class.
 
         :param user_email: User's email.
+        :param user_name: System unique name of user.
         :param user_password: User's password in clear text.
         :param created_by_user_id: User is created under this user id.
+        :param user_id: Manual set user identification number.
         """
 
         self.set_up_basic_information(
@@ -50,11 +59,21 @@ class User(CoreCatBaseMixin, Base):
             created_by_user_id
         )
 
-        if utils.validate_format_email(user_email):
+        if user_email is None:
+            self.user_email = None
+        elif utils.validate_format_email(user_email):
             self.user_email = user_email
         else:
             raise ValueError('Email {0} is not valid!'.format(user_email))
+
+        # TODO: UserName checking.
+        self.user_name = user_name
+
         self.password = utils.encrypt_password(user_password)
+
+        # We don't check existence of manual user ID, not this level.
+        if kwargs.get('user_id') is not None:
+            self.user_id = kwargs.get('user_id')
 
     def get_id(self):
         """Get the user id in unicode string. This is the standard for later

@@ -6,7 +6,7 @@ from ._sqlalchemy import Column, \
 
 
 class Project(CoreCatBaseMixin, Base):
-    """Project Model class represent for the 'projects' table
+    """Project Model class represent for the 'project' table
     which is used to store project's basic information."""
 
     # Add the real table name here.
@@ -44,4 +44,4 @@ class Project(CoreCatBaseMixin, Base):
             created_by_user_id
         )
         self.project_name = project_name
-        self.project_description = kwargs.get('project_description', None)
+        self.project_description = kwargs.get('project_description')

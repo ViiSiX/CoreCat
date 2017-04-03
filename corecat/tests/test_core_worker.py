@@ -7,5 +7,7 @@ class TestCoreWorker(object):
     """Unit tests for corecat.worker.Worker class."""
 
     def test_should_be_loaded_before_init(self, fix_test_conf_reset):
+        """Worker can not work without config."""
+
         with pytest.raises(ConfigNotLoadedException):
             w1 = Worker(0)
