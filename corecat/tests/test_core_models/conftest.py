@@ -4,6 +4,7 @@ import pytest
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from corecat.models.user import User
+from corecat.models.groups import Group
 from corecat.models.directory import Directory
 from corecat.models.project import Project
 from corecat.models.source import SourceBase, SourceAttribute
@@ -19,6 +20,7 @@ def fix_create_all_tables():
     # Create tables
     # TODO: Auto create all
     User.__table__.create(engine, checkfirst=True)
+    Group.__table__.create(engine, checkfirst=True)
     Project.__table__.create(engine, checkfirst=True)
     Directory.__table__.create(engine, checkfirst=True)
     SourceBase.__table__.create(engine, checkfirst=True)
@@ -35,7 +37,12 @@ def fix_add_user(fix_create_all_tables):
     """Add an user to in-memory database."""
 
     session = fix_create_all_tables
-    user = User('root@local.domain', 'Hey! Jim!')
+    user = User(
+        user_email=None,
+        user_password='Hey! Jim!',
+        user_name='root',
+        user_id=0
+    )
     session.add(user)
     session.commit()
 

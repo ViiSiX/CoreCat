@@ -7,7 +7,8 @@ from sqlalchemy.orm import relationship, backref, \
     collections
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.ext.hybrid import hybrid_property
-from sqlalchemy import Column, ForeignKey, \
+from sqlalchemy import Column, \
+    ForeignKey, UniqueConstraint, \
     Boolean, \
     Integer, SmallInteger, BigInteger, \
     String, Text, \

@@ -9,13 +9,13 @@ class TestSourceModel(object):
 
     source_1 = {
         'source_name': 'Data Source #1',
-        'created_by_user_id': 1,
+        'created_by_user_id': 0,
         'source_type': SOURCE_TYPE_CODES['Base']
     }
 
     source_2 = {
         'source_name': 'Data Source #1',
-        'created_by_user_id': 1,
+        'created_by_user_id': 0,
         'source_type': SOURCE_TYPE_CODES['Base']
     }
 
@@ -40,10 +40,11 @@ class TestSourceModel(object):
         session.add(source_1)
         session.commit()
 
+        assert source_1.source_id == 1
         assert source_1.is_active
         assert not source_1.is_deleted
-        assert source_1.created_by == 1
-        assert source_1.last_updated_by == 1
+        assert source_1.created_by == 0
+        assert source_1.last_updated_by == 0
         datetime_now = datetime.datetime.now()
         assert round(
             (datetime_now - source_1.created_on).total_seconds()
@@ -56,8 +57,9 @@ class TestSourceModel(object):
         session.add(source_2)
         session.commit()
 
-        assert source_2.created_by == 1
-        assert source_2.last_updated_by == 1
+        assert source_2.source_id == 2
+        assert source_2.created_by == 0
+        assert source_2.last_updated_by == 0
 
     def test_would_add_custom_attribute_success(self, fix_create_all_tables):
         """Add Custom attribute to a Data Source."""

@@ -12,10 +12,12 @@ class TestUserModel(object):
 
     user_1 = {
         'user_email': 'test@test.test',
+        'user_name': 'user1',
         'user_password': 'YouShallNotPass'
     }
     user_2 = {
         'user_email': 'cat@ta.lina',
+        'user_name': 'user2',
         'user_password': 'Candy, Sugar, Salt!'
     }
 
@@ -25,6 +27,7 @@ class TestUserModel(object):
         user = User(**self.user_1)
 
         assert user.user_email == self.user_1['user_email']
+        assert user.user_name
         assert user.password
         assert utils.check_password(
             user.password, self.user_1['user_password']
@@ -32,12 +35,26 @@ class TestUserModel(object):
         assert user._version == \
             MODEL_VERSION[OBJECT_CODES['User']]
 
+    def test_would_init_fail_on_user_name(self, fix_create_all_tables):
+        """Check if class initial will be failed on empty user name."""
+
+        session = fix_create_all_tables
+        user = User(user_email='john@tom.marry',
+                    user_name=None,
+                    user_password='secret')
+
+        with pytest.raises(IntegrityError):
+            session.add(user)
+            session.commit()
+
     def test_would_init_fail_on_user_email(self):
         """Check if class initial will be failed on bad email address."""
 
         with pytest.raises(ValueError) as except_info:
             user = User(
-                'mail_ops', 'password'
+                user_email='mail_ops',
+                user_name='john',
+                user_password='password'
             )
         assert 'Email mail_ops is not valid!' in str(except_info)
 
@@ -46,7 +63,9 @@ class TestUserModel(object):
 
         with pytest.raises(TypeError) as exec_info:
             user = User(
-                'mail_ok@mail.mail', None
+                user_email='mail_ok@mail.mail',
+                user_name='john',
+                user_password=None
             )
         assert 'Password should be a string!' in str(exec_info)
 
@@ -106,7 +125,9 @@ class TestUserModel(object):
         assert user_2.created_by == user_1.user_id
         assert user_2.last_updated_by == user_1.user_id
 
-    def test_would_add_failed_on_duplicate_email(self, fix_create_all_tables):
+    def test_would_add_failed_on_duplicate_email_or_username(
+            self, fix_create_all_tables
+    ):
         """No duplicate allowed in User table."""
 
         session = fix_create_all_tables
@@ -122,3 +143,23 @@ class TestUserModel(object):
             session.add(User(**self.user_2))
             session.add(User(**self.user_2))
             session.commit()
+
+    def test_would_add_many_system_users(self, fix_create_all_tables):
+        """Test would insert many users without email address."""
+
+        session = fix_create_all_tables
+
+        session.add(User(
+            user_name='root1',
+            user_password='some_secret'
+        ))
+        session.commit()
+
+        session.add(User(
+            user_name='root2',
+            user_password='some_password'
+        ))
+        session.commit()
+
+        no_of_user = session.query(User).count()
+        assert no_of_user == 2

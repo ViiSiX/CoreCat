@@ -55,7 +55,7 @@ class SourceBase(CoreCatBaseMixin, ProxyDictMixin, Base):
         :type source_name: str
         :param source_type: Type of the data source.
         :type source_type: int
-        :param created_by_user_id:
+        :param created_by_user_id: created under this user Id.
         :type created_by_user_id: int
         """
 

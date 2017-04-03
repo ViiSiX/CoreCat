@@ -9,13 +9,13 @@ class TestProjectModel(object):
     directory_1 = {
         'directory_name': 'directory #1',
         'directory_description': 'Description for directory #1',
-        'created_by_user_id': 1,
+        'created_by_user_id': 0,
     }
 
     directory_2 = {
         'directory_name': 'directory #2',
         'directory_description': 'Description for directory #2',
-        'created_by_user_id': 1,
+        'created_by_user_id': 0,
     }
 
     def test_would_init_work(self, fix_add_user):
@@ -38,10 +38,11 @@ class TestProjectModel(object):
         session.add(directory_1)
         session.commit()
 
+        assert directory_1.directory_id == 1
         assert directory_1.is_active
         assert not directory_1.is_deleted
-        assert directory_1.created_by == 1
-        assert directory_1.last_updated_by == 1
+        assert directory_1.created_by == 0
+        assert directory_1.last_updated_by == 0
         datetime_now = datetime.datetime.now()
         assert round(
             (datetime_now - directory_1.created_on).total_seconds()
@@ -54,5 +55,6 @@ class TestProjectModel(object):
         session.add(directory_2)
         session.commit()
 
-        assert directory_2.created_by == 1
-        assert directory_2.last_updated_by == 1
+        assert directory_2.directory_id == 2
+        assert directory_2.created_by == 0
+        assert directory_2.last_updated_by == 0
